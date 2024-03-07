@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cmail</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light">  <!-- Navbar -->
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="images\WSU_Logo.png" class="mainLogo"alt="Home Button">
+            </a>
+        </div>
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse justify-content-end">  <!-- Right Navbar-->
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown navbarItem">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Switch Email
+                        </a>
+                        <div class="dropdown-menu" aria-labeledby="navbarDropdownMenuLink">
+                            <button class="dropdown-item"> Email1</button>
+                            <button class="dropdown-item"> Email2</button>
+                            <button class="dropdown-item"> Add Email </button>
+                        </div>
+                    </li>
+                    <li class="navbar-text navbarItemPipe">
+                        |
+                    </li>
+                    <li class="nav-item dropdown navbarItem">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Settings
+                        </a>
+                        <div class="dropdown-menu" aria-labeledby="navbarDropdownMenuLink">
+                            <button class="dropdown-item"> Setting1</button>
+                            <button class="dropdown-item"> Setting2</button>
+                            <button class="dropdown-item"> Setting3</button>
+                        </div>
+                    </li>
+                    <li class="navbar-text navbarItemPipe">
+                        |
+                    </li>
+                    <li class="nav-item navbarItem">
+                        <a class="nav-link" aria-current="page" href="#">Logout</a>
+                    </li>
+                </ul>
+            </div>  <!-- Right Navbar End-->
+        </div>
+    </nav>  <!-- Navbar End -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2"> <!-- Mailbox Column -->
+                <div class="row">
+                    <div class="list-group mailboxList">
+                        <button type="button" class="list-group-item mailboxListButton">
+                            New Mail
+                        </button>
+                        <button type="button" class="list-group-item mailboxListButton">
+                            Inbox
+                        </button>
+                        <button type="button" class="list-group-item mailboxListButton">
+                            Sent
+                        </button>
+                        <button type="button" class="list-group-item mailboxListButton">
+                            Spam
+                        </button>
+                        <button type="button" class="list-group-item mailboxListButton">
+                            Trash
+                        </button>
+                    </div>
+                </div>
+            </div> <!-- Mailbox Column End-->
+            <div class="col-3">   <!-- Email Preview Column -->
+                <div class="row">
+                    <ul class="list-group emailList">
+                        <li class="list-group-item emailListElement">    <!-- Email1 Preview -->
+                            <div class="d-flex justify-content-between">
+                                <p>Title1</p>
+                                <p>Date1</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>From1</p>
+                                <p>Pic1</p>
+                            </div>
+                            <div class="row">
+                                <p>Body1...</p>
+                            </div>
+                        </li>   <!-- Email1 Preview End -->
+                        <li class="list-group-item emailListElement">    <!-- Email1 Preview -->
+                            <div class="d-flex justify-content-between">
+                                <p>Title2</p>
+                                <p>Date2</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>From2</p>
+                                <p>Pic2</p>
+                            </div>
+                            <div class="row">
+                                <p>Body2...</p>
+                            </div>
+                        </li>   <!-- Email1 Preview End -->
+                    </ul>
+                </div>
+            </div>  <!-- Email Preview Column End -->
+            <div class="col">   <!-- Full Email Column -->
+                <div class="d-flex justify-content-end">
+                    <ul class="list-group list-group-horizontal">
+                        <button type="button" class="list-group-item emailButton">
+                            Delete
+                        </button>
+                        <button type="button" class="list-group-item emailButton">
+                            Move
+                        </button>
+                        <button type="button" class="list-group-item emailButton">
+                            Forward
+                        </button>
+                        <button type="button" class="list-group-item emailButton">
+                            Reply
+                        </button>
+                    </ul>
+                </div>
+                <div class="row"> <!-- Full Email -->
+                    <div class="col">
+                        <div class="row"> <!-- Title and Date -->
+                            <div class="col">
+                                <div class="row">
+                                    <p> Title </p> 
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex justify-content-end">
+                                    <p>Date</p>
+                                </div>
+                            </div>
+                        </div> <!-- Title and Date End -->
+                        <div class="row">
+                            <p> From: Picture, Name, Email </p>
+                        </div>
+                        <div class="row">
+                            <p>CC: Picture, Name, Email </p>
+                        </div>
+                        <div class="row">
+                            <p>Full email............</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <ul class="list-group list-group-horizontal">
+                        <button type="button" class="list-group-item emailButton">
+                            Delete
+                        </button>
+                        <button type="button" class="list-group-item emailButton">
+                            Move
+                        </button>
+                        <button type="button" class="list-group-item emailButton">
+                            Forward
+                        </button>
+                        <button type="button" class="list-group-item emailButton">
+                            Reply
+                        </button>
+                    </ul>
+                </div>
+            </div>  <!-- Full Email Column End -->
+        </div>
+    </div>
+
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"
+></script>
+</body>
+</html>

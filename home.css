@@ -1,0 +1,41 @@
+/* Navbar */
+.mainLogo{
+    width: 75%;
+}
+.navbarItem{
+    font-size: 18pt
+}
+.navbarItemPipe{
+    font-size: 18pt
+}
+
+/* Mailbox List */
+.mailboxList{
+
+}
+
+.mailboxListButton{
+    font-size: 20pt;
+}
+
+.mailboxListButton:hover{
+    background-color:grey;
+}
+
+/* Mailbox Email List */
+.emailList{
+    border-color: black;
+}
+
+.emailListElement{
+    
+}
+
+.emailListElement:hover{
+    background-color: grey;
+}
+
+/* Full Email */
+.emailButton:hover{
+    background-color: grey;
+}
