@@ -1,6 +1,15 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const db = new sqlite3.Database('./cmail.db');
+
+// create table if needed
+db.serialize(() => {
+    db.run(`CREATE TABLE IF NOT EXISTS Users (
+            email TEXT PRIMARY KEY,
+            password TEXT NOT NULL)`
+    );
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
