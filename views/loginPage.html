@@ -13,25 +13,21 @@
                 </p>
                 <br>
 
-                <form class = "login" action="" method="post" id = "login">
+                <form class = "login" id = "login">
                     <label for = "email">Email:</label> <br><br>
-                    <input class = "Input" type = "text" id = "email" name = "email"> <br><br><br>
+                    <input class = "Input" type = "text" id = "username"> <br><br><br>
                     <label for="password">Password:</label> <br><br>
-                    <input class = "Input" type="password" id = "password" name = "password"><br><br>
+                    <input class = "Input" type="password" id = "password"><br><br>
+                    <button type="submit" form = "login" style="width: 38%; height: 7%; margin-left: 30%;">
+                        Login
+                    </button>
                 </form>
-
-                <button type="submit" form = "login" value = "submit" style="width: 38%; height: 7%; margin-left: 30%;">
-                    <a style="text-decoration: none; color: black;" href="home.html">Login</a>
-                </button>
-
                 <p class = "createNewUser">
                     No account?   
                     Sign up <a href="newUser.html">here</a>
                 </p>
             </div>
         </div>
-
-
-    
+        <script src="login.js"></script>
 </body>
 </html>

@@ -24,12 +24,61 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.static('views'));
+app.use(express.static('routes'));
 
 // route to get HTML form
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/loginPage.html');
 });
 
+// route to handle signup form
+app.post('/submitNewUser', (req, res) => {
+    const {username, password} = req.body;
+
+    // Insert data into database
+    const sql = 'INSERT INTO Users (username, password) VALUES (?, ?)';
+    db.run(sql, [username, password], function(err) {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send('Internal Server Error');
+        } 
+        else {
+            console.log('Form submitted successfully')
+            res.status(200).send('Form submitted successfully');
+        }
+    });
+});
+
+// route to handle login form
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Query the database to retrieve the user's password based on the username
+    const sql = 'SELECT password FROM Users WHERE username = ?';
+    db.get(sql, [username], (err, row) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send('Internal Server Error');
+        } 
+        else {
+            if (row) {
+                // If a user with the given username exists, check if the password matches
+                if (row.password === password) {
+                    // Password matches, authentication successful
+                    res.status(200).send('User authentication successful');
+                } 
+                else {
+                    // Password doesn't match
+                    res.status(401).send('Incorrect password');
+                }
+            } 
+            else {
+                // User not found
+                res.status(404).send('User not found');
+            }
+        }
+    });
+});
   
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
