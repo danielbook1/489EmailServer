@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
 const port = 3000;
@@ -22,13 +23,31 @@ db.serialize(() => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
-app.use(express.static('views'));
-app.use(express.static('routes'));
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true
+}));
+
+const requireLogin = (req, res, next) => {
+    if (req.session && req.session.userId) {
+      // User is authenticated, proceed to the next middleware
+      next();
+    }
+    else {
+      // User is not authenticated, redirect to login page
+      res.sendFile(__dirname + '/views/loginPage.html');
+    }
+};
 
 // route to get HTML form
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/loginPage.html');
+});
+
+// routes that require user to be logged in
+app.get('/home.html', requireLogin, (req, res) => {
+    res.sendFile(__dirname + '/views/home.html');
 });
 
 // route to handle signup form
@@ -65,6 +84,7 @@ app.post('/login', (req, res) => {
                 // If a user with the given username exists, check if the password matches
                 if (row.password === password) {
                     // Password matches, authentication successful
+                    req.session.userId = username;
                     res.status(200).send('User authentication successful');
                 } 
                 else {
@@ -83,3 +103,7 @@ app.post('/login', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
+app.use(express.static('public'));
+app.use(express.static('views'));
+app.use(express.static('routes'));

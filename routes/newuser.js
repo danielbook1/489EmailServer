@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
-      const captcha = document.getElementById('captcha').value;
+      const captcha = document.getElementById('g-recaptcha-response').value;
   
       if (captcha.length > 0)
       {
