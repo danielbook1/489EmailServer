@@ -5,6 +5,17 @@ const app = express();
 const port = 3000;
 const db = new sqlite3.Database('./cmail.db');
 
+
+const homeRouter = require('./routes/home');
+const addEmailRouter = require('./routes/addEmail');
+const logoutRouter = require('./routes/logout');
+
+app.set('views', path.join(__dirname,'views'));
+app.set('view engine', 'ejs');
+app.use('/home', homeRouter);
+app.use('/addEmail', addEmailRouter);
+app.use('/logout', logoutRouter);
+
 // create table if needed
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS Users (
