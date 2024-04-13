@@ -6,16 +6,6 @@ const port = 3000;
 const db = new sqlite3.Database('./cmail.db');
 
 
-const homeRouter = require('./routes/home');
-const addEmailRouter = require('./routes/addEmail');
-const logoutRouter = require('./routes/logout');
-
-app.set('views', path.join(__dirname,'views'));
-app.set('view engine', 'ejs');
-app.use('/home', homeRouter);
-app.use('/addEmail', addEmailRouter);
-app.use('/logout', logoutRouter);
-
 // create table if needed
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS Users (
@@ -110,10 +100,22 @@ app.post('/login', (req, res) => {
         }
     });
 });
-  
+
+//Logout route
+app.get('/logout', requireLogin, function(req, res, next) {
+    res.sendFile(__dirname + '/views/logout.html');
+});
+
+//Add email route
+app.get('/addEmail', requireLogin,  function(req, res, next) {
+    res.sendFile(__dirname + '/views/addEmail.html');
+});
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
+
 
 app.use(express.static('public'));
 app.use(express.static('views'));
