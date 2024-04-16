@@ -210,14 +210,9 @@ app.post('/admin', (req, res) => {
     })
 });
 
-
-
-
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
-
-
 
 app.use(express.static('public'));
 app.use(express.static('views'));
