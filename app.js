@@ -17,8 +17,7 @@ db.serialize(() => {
 
     db.run(`CREATE TABLE IF NOT EXISTS Emails (
             email TEXT NOT NULL,
-            password TEXT NOT NULL,
-            email TEXT
+            password TEXT NOT NULL
         )`);
 });
 
