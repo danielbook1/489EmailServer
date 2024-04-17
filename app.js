@@ -5,27 +5,19 @@ const app = express();
 const port = 3000;
 const db = new sqlite3.Database('./cmail.db');
 
-
 // create table if needed
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS Users (
             username TEXT PRIMARY KEY,
-            password TEXT NOT NULL
-        )`);
-
-    db.run(`CREATE TABLE IF NOT EXISTS Emails (
-            email TEXT NOT NULL,
             password TEXT NOT NULL,
-            username TEXT NOT NULL,
-            FOREIGN KEY (username) REFERENCES Users(username),
-            PRIMARY KEY (email, username)
+            email TEXT
         )`);
 });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
-    secret: 'your-secret-key',
+    secret: 'secret-key',
     resave: false,
     saveUninitialized: true
 }));
@@ -43,12 +35,22 @@ const requireLogin = (req, res, next) => {
 
 // route to get HTML form
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/views/loginPage.html');
+    if (req.session && req.session.userId){
+        res.sendFile(__dirname + '/views/home.html');
+    }
+    else{
+        res.sendFile(__dirname + '/views/loginPage.html');
+    }
 });
 
 // routes that require user to be logged in
 app.get('/home.html', requireLogin, (req, res) => {
     res.sendFile(__dirname + '/views/home.html');
+});
+
+//Logout route
+app.get('/logout', requireLogin, (req, res) => {
+    res.sendFile(__dirname + '/views/logout.html');
 });
 
 // route to handle signup form
@@ -101,21 +103,15 @@ app.post('/login', (req, res) => {
     });
 });
 
-//Logout route
-app.get('/logout', requireLogin, function(req, res, next) {
-    res.sendFile(__dirname + '/views/logout.html');
-});
 
 //Add email route
-app.get('/addEmail', requireLogin,  function(req, res, next) {
-    res.sendFile(__dirname + '/views/addEmail.html');
+app.post('/addEmail', requireLogin, (req, res) => {
+    
 });
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
-
-
 
 app.use(express.static('public'));
 app.use(express.static('views'));
