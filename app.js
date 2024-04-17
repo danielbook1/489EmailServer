@@ -10,6 +10,14 @@ db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS Users (
             username TEXT PRIMARY KEY,
             password TEXT NOT NULL,
+            admin TEXT NOT NULL
+            )`);
+
+    //db.run(`INSERT INTO Users VALUES ('admin', 'value', 'yes')`)
+
+    db.run(`CREATE TABLE IF NOT EXISTS Emails (
+            email TEXT NOT NULL,
+            password TEXT NOT NULL,
             email TEXT
         )`);
 });
@@ -56,10 +64,11 @@ app.get('/logout', requireLogin, (req, res) => {
 // route to handle signup form
 app.post('/submitNewUser', (req, res) => {
     const {username, password} = req.body;
+    const isAdmin = "no"
 
     // Insert data into database
-    const sql = 'INSERT INTO Users (username, password) VALUES (?, ?)';
-    db.run(sql, [username, password], function(err) {
+    const sql = 'INSERT INTO Users (username, password, admin) VALUES (?, ?, ?)';
+    db.run(sql, [username, password, isAdmin], function(err) {
         if (err) {
             console.error(err.message);
             res.status(500).send('Internal Server Error');
@@ -107,6 +116,100 @@ app.post('/login', (req, res) => {
 //Add email route
 app.post('/addEmail', requireLogin, (req, res) => {
     
+});
+
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+
+//Add Admin route
+app.get('/admin',(req, res) => {
+  let sql;
+  //Opens the db
+  const db = new sqlite3.Database('cmail.db', (err)=>{
+    if(err) 
+      {
+        console.log("1")
+        return console.error(err)
+      }
+  })
+  console.log("DB Opened")
+
+  //Gets all the users to pass into the table in admin.ejs
+  db.all('SELECT * FROM Users', (err, rows) =>{
+    if(err){
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    console.log({Users: rows})
+    res.render('admin', {Users: rows});
+  })
+});
+
+//Admin post route
+app.post('/admin', (req, res) => {
+    const { username, password, formType } = req.body;
+    //Open up db
+    const db = new sqlite3.Database('cmail.db', (err)=>{
+        if(err) 
+        {
+            console.log("1")
+            return console.error(err)
+        }
+    })
+
+    //Action when promoteUser form is submitted
+    if(formType === 'promoteUser')
+    {
+        const promoteToAdmin = `UPDATE Users SET admin = ? WHERE username = ? AND password = ?`
+        const yes = 'yes'
+        db.run(promoteToAdmin, [yes, username, password], function(err) {
+            if (err) {
+              console.error('Error cannot promote to Admin: ', err.message);
+              return;
+            }
+            console.log('Value updated successfully.');
+          }); 
+        db.close();
+    }
+
+    //Action when deleteUser is submitted
+    else if(formType === 'deleteUser')
+    {
+        const promoteToAdmin = `DELETE FROM Users WHERE username = ? AND password = ?`
+        const yes = 'yes'
+        db.run(promoteToAdmin, [username, password], function(err) {
+            if (err) {
+              console.error('Error cannot delete user: ', err.message);
+              return;
+            }
+            console.log('User deleted successfully.');
+          }); 
+        db.close();
+    }
+
+    //Action for when logout is submitted
+    else if(formType === 'logOut')
+    {
+        res.status(200).send('User authentication successful');
+    }
+
+    let sql;
+    const db2 = new sqlite3.Database('cmail.db', (err)=>{
+        if(err) 
+        {
+            console.log("1")
+            return console.error(err)
+        }
+    })
+
+    db2.all('SELECT * FROM Users', (err, rows) =>{
+        if(err){
+        res.status(500).send('Internal Server Error');
+        return;
+        }
+        console.log({Users: rows})
+        res.render('admin', {Users: rows});
+    })
 });
 
 app.listen(port, () => {
