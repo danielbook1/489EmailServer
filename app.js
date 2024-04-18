@@ -13,12 +13,14 @@ db.serialize(() => {
             admin TEXT NOT NULL
             )`);
 
-    //db.run(`INSERT INTO Users VALUES ('admin', 'value', 'yes')`)
-
-    db.run(`CREATE TABLE IF NOT EXISTS Emails (
+    db.run(`CREATE TABLE IF NOT EXISTS GmailAccounts (
             email TEXT NOT NULL,
-            password TEXT NOT NULL
-        )`);
+            accessToken TEXT NOT NULL,
+            refreshToken TEXT NOT NULL,
+            username TEXT NOT NULL,
+            FOREIGN KEY (username) REFERENCES Users(username),
+            PRIMARY KEY (username)
+            )`);
 });
 
 app.use(express.json());
@@ -109,12 +111,6 @@ app.post('/login', (req, res) => {
             }
         }
     });
-});
-
-
-//Add email route
-app.post('/addEmail', requireLogin, (req, res) => {
-    
 });
 
 app.set('view engine', 'ejs');
