@@ -1,9 +1,28 @@
 const express = require('express');
 const session = require('express-session');
+const { google } = require('googleapis');
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
 const port = 3000;
 const db = new sqlite3.Database('./cmail.db');
+
+// gmail api constants
+const CLIENT_ID = '59708220095-em4upqmrn6vjg90a24e2r4jr794s4mqj.apps.googleusercontent.com';
+const CLIENT_SECRET = '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';
+const REDIRECT_URL = 'http://localhost:3000';
+const SCOPES = [
+    'https://www.googleapis.com/auth/gmail.modify'
+];
+const oauth2Client = new google.auth.OAuth2(
+    CLIENT_ID,
+    CLIENT_SECRET,
+    REDIRECT_URL
+);
+const authorizationUrl = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: SCOPES,
+    include_granted_scopes: true
+});
 
 // create table if needed
 db.serialize(() => {
@@ -13,13 +32,12 @@ db.serialize(() => {
             admin TEXT NOT NULL
             )`);
 
-    db.run(`CREATE TABLE IF NOT EXISTS GmailAccounts (
-            email TEXT NOT NULL,
-            accessToken TEXT NOT NULL,
+    db.run(`CREATE TABLE IF NOT EXISTS RefreshTokens (
             refreshToken TEXT NOT NULL,
             username TEXT NOT NULL,
+            email TEXT NOT NULL,
             FOREIGN KEY (username) REFERENCES Users(username),
-            PRIMARY KEY (username)
+            PRIMARY KEY (username, email)
             )`);
 });
 
@@ -43,8 +61,23 @@ const requireLogin = (req, res, next) => {
 };
 
 // route to get HTML form
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     if (req.session && req.session.userId){
+        const { code } = req.query;
+        if (code) {
+            try {
+                const { tokens } = await oauth2Client.getToken(code)
+                if (tokens.refreshToken){
+                    console.log(tokens.refreshToken)
+                    // saveTokenToDatabase(tokens.refreshToken)
+                }
+            }
+            catch (error) {
+                console.error('Error exchanging authorization code for tokens:', error);
+                res.sendStatus(500);
+            }
+        }
+
         res.sendFile(__dirname + '/views/home.html');
     }
     else{
@@ -62,6 +95,44 @@ app.get('/logout', requireLogin, (req, res) => {
     res.sendFile(__dirname + '/views/logout.html');
 });
 
+function saveTokenToDatabase(refreshToken, username, email) {
+    const sql = 'INSERT INTO RefreshTokens (refreshToken, username, email) VALUES (?, ?, ?)';
+    db.run(sql, [refreshToken, username, email], function(err) {
+        if (err) {
+            console.error(err.message);
+        }
+        else {
+            console.log('Refresh token saved in database');
+        }
+    });
+}
+
+function getTokenFromDatabase(username, email) {
+    const sql = 'SELECT refreshToken FROM RefreshTokens WHERE username = ? && email = ?';
+    db.get(sql, [username, email], (err,row) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send('Internal Server Error');
+        } 
+        else if (row) {
+            return row.refreshToken;
+        }
+    });
+}
+
+function getEmailsFromDatabase(username) {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT email FROM RefreshTokens WHERE username = ?';
+        db.all(sql, [username], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const emails = rows.map(row => row.email);
+            resolve(emails);
+        });
+    });
+}
 // route to handle signup form
 app.post('/submitNewUser', (req, res) => {
     const {username, password} = req.body;
@@ -111,6 +182,15 @@ app.post('/login', (req, res) => {
             }
         }
     });
+});
+
+// route to handle add email
+app.post('/addEmail', requireLogin, (req, res) => {
+    res.json({ authorizationUrl });
+});
+
+app.get('/oauth2callback', async (req, res) => {
+    console.log("reached the callback")
 });
 
 app.set('view engine', 'ejs');
