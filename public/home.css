@@ -1,46 +1,53 @@
 /* Navbar */
-.mainLogo{
-    width: 75%;
-}
-.navbarItem{
-    font-size: 18pt
-}
-.navbarItemPipe{
-    font-size: 18pt
-}
 
-/* Main Body*/
-.body, html{
-    background: linear-gradient(to top right, #ffff99 0%, #99ccff 100%);
+.html{
+    height: 100hv;
+}
+.body{
+    height: 100hv;
+}
+/* .mainContainer{
+    /*height: 100%;*/
+
+/* .bottomSpace{
     height: 100%;
-}
-
-.mainDiv{
-    background: rgba(0, 0, 0, 0);
-}
+} */
 
 /* Email List */
 
-.userEmailList{
-
-}
-.userEmailListButton{
+/* .userEmailList{
+    
+} */
+.userEmailListButton {
     font-size: 14pt;
+
+    
 }
 .userEmailListButton:hover{
-    background-color: grey;
+    background-color: lightgray !important;
 }
 
-.userEmailAddButton{
+.userEmailAddButton {
     font-size: 20pt;
+
+    
 }
 .userEmailAddButton:hover{
-    background-color: grey;
+    background-color: lightgray !important;
 }
 
 /* Mailbox List */
-.mailboxList{
+/* .mailboxList{
 
+} */
+
+.emailPreviewList{
+    height: 87vh;
+    overflow-y: auto;
+}
+
+.list-group-item{
+    background-color: beige !important;
 }
 
 .mailboxListButton{
@@ -48,31 +55,65 @@
 }
 
 .mailboxListButton:hover{
-    background-color:grey;
+    background-color:lightgray !important;
 }
 
 /* Mailbox Email List */
 .emailList{
     border-color: black;
-}
-
-.emailPreview1{
     
 }
 
-.emailPreview2{
-    
+.fullEmailContainer{
+    background-color: beige;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
-.emailPreview1:hover{
-    background-color: grey;
-}
-
-.emailPreview2:hover{
-    background-color: grey;
+.emailListElement:hover{
+    background-color: lightgray !important;
 }
 
 /* Full Email */
 .emailButton:hover{
-    background-color: grey;
+    background-color: lightgray !important;
+}
+
+.customCardHeader{
+    display: flex; 
+    flex-direction:row; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cc{
+    display: flex;
+}
+
+.title{
+    text-align: left;
+}
+
+.date{
+    text-align: right;
+}
+
+.card{
+    background-color: beige !important;
+    
+}
+
+.emailHeader{
+    font-size: 14pt;
+    margin-bottom: 0%;
+}
+
+.messageWrapper{
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+    overflow-x: auto;
+    max-height: 55vh;
+    overflow-x: auto;
+    max-width: 100%;
 }

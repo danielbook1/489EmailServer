@@ -8,9 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const password = document.getElementById('password').value;
       const captcha = document.getElementById('g-recaptcha-response').value;
 
-      if (captcha.length > 0 || true)
+      if (captcha.length > 0)
       {
-        if (true) { //TODO: Add checks for valid username and password
           // submit form data
           fetch('/login', {
             method: 'POST',
@@ -26,9 +25,24 @@ document.addEventListener('DOMContentLoaded', function() {
               }
               else {
                 console.log(response.statusText);
+                triggerAlert('Login failed. Did you enter the right credentials?');
               }
           });
-        }
       }
     });
 });
+
+function triggerAlert(message) {
+  // Create alert element
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+  alert.textContent = message;
+  
+  const alertDisplay = document.getElementById('alertDisplay');
+  alertDisplay.appendChild(alert);
+  
+  // Remove alert after some time (e.g., 3 seconds)
+  setTimeout(() => {
+      alertDisplay.remove();
+  }, 5000);
+  }

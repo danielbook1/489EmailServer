@@ -1,109 +1,17 @@
-
-.row{
-    content: "";
-    display: table;
-    clear: both;
-}
-.column{
-    position: absolute;
-    top: 15%;
-    left: 35%;
-    float: left;
-    width: 30%; 
-    margin-left: 20px;
-    margin-bottom: 50px;
-    height: 70%;
-    background-color: beige;
-    border-radius: 15px;
+.background{
+    width: 100%; 
+    height: 100%; 
+    background: linear-gradient(to top right, #ffff99 0%, #99ccff 100%); 
+    background-repeat: no-repeat; 
+    background-size: contain;
 }
 
-.column2{
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    float: left;
-    width: 35%; 
-    margin-left: 20px;
-    margin-bottom: 50px;
-    height: 80%;
-    background-color: beige;
-    border-radius: 15px;
-}
-
-.column3{
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    float: left;
-    width: 35%; 
-    margin-left: 20px;
-    margin-bottom: 50px;
-    height: 80%;
-    background-color: beige;
-    border-radius: 15px;
-}
-
-.Cmail{
-    color: black;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 48px;
-    margin-left: 30%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-
-.login{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 16px;
-    margin-left: 30%;
-}
-
-.createNewUser{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.alert{
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
     font-size: 14px;
-    margin-left: 33%;
     color: black;
-}
-
-.logo{
-    color: black;
-    text-decoration: none;
-}
-.logo:hover{
-    color: rgb(248, 66, 66);
-}
-
-.Input{
-    width: 55%;
-}
-
-.Users{
-    color: black;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 48px;
-    margin-left: 40%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-
-.Promote{
-    color: black;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 28px;
-    margin-left: 10%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-
-.adminForm{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 16px;
-    margin-left: 10%;
-}
-
-.logoutOK{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 48px;
-    margin-left: 20%;
-    color: black;
+    font-weight: bold;
+    background-color: rgb(255, 78, 78);
 }

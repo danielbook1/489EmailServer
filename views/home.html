@@ -4,154 +4,216 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cmail</title>
+
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="navBar.css">
+    <link rel="stylesheet" href="basics.css">
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-        crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="home.css">
+        crossorigin="anonymous">
 </head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-light">  <!-- Navbar -->
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="images\WSU_Logo.png" class="mainLogo"alt="Home Button">
-            </a>
-        </div>
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse justify-content-end">  <!-- Right Navbar-->
-                <ul class="navbar-nav">
-                    <li class="nav-item navbarItem">
-                        <!-- <a class="nav-link" aria-current="page" href="/logout">Logout</a> -->
-                        <button type="button" id="logout">Logout</button>
-                    </li>
-                </ul>
-            </div>  <!-- Right Navbar End-->
-        </div>
-    </nav>  <!-- Navbar End -->
-
-    <div class="container-fluid mainDiv">
-        <div class="row">
-            <div class="col-2">
-                <div class="list-group userEmailList">
-                    <button type="button" class="list-group-item userEmailAddButton" id="addEmail">
-                        Add Email
-                    </button>
-                </div>
+<body class="background">
+        <nav class="navbar navbar-expand-sm navbar-light">  <!-- Navbar -->
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="images\Logo.png" class="navbarLogo" alt="Home Button">
+                </a>
             </div>
-            <div class="col-2"> <!-- Mailbox Column -->
-                <div class="row">
-                    <div class="list-group mailboxList">
-                        <button type="button" class="list-group-item mailboxListButton">
-                            <a style="text-decoration: none; color: black;" href="email.html">New Mail</a>
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse justify-content-end">  <!-- Right Navbar-->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <!-- <a class="nav-link" href="/logout">Logout</a> -->
+                            <button type="button" id="logout">Logout</button>
+                        </li>
+                    </ul>
+                </div>  <!-- Right Navbar End-->
+            </div>
+        </nav>  <!-- Navbar End -->
+
+        <div class="container-fluid mainContainer">
+            <div class="row">
+                <div class="col-2">
+                    <div class="list-group userEmailList">
+                        <button type="button" class="userEmailAddButton list-group-item" id="addEmail">
+                            <!-- <a style="text-decoration: none; color:black;" href="/addEmail">Add Email</a> -->
+                            Add Email
                         </button>
-                        <button type="button" class="list-group-item mailboxListButton" id="inbox">
-                            Inbox
+                        <!-- <button type="button" class="list-group-item userEmailListButton">
+                            Email1
                         </button>
-                        <button type="button" class="list-group-item mailboxListButton" id="sent">
-                            Sent
+                        <button type="button" class="list-group-item userEmailListButton">
+                            Email2
                         </button>
-                        <button type="button" class="list-group-item mailboxListButton" id="spam">
-                            Spam
-                        </button>
-                        <button type="button" class="list-group-item mailboxListButton" id="trash">
-                            Trash
-                        </button>
+                        <button type="button" class="list-group-item userEmailListButton">
+                            Email3
+                        </button> -->
                     </div>
                 </div>
-            </div> <!-- Mailbox Column End-->
-            <div class="col-3">   <!-- Email Preview Column -->
-                <div class="row">
-                    <ul class="list-group emailList">
-                        <li class="list-group-item emailPreview1">    <!-- Email1 Preview -->
-                            <div class="d-flex justify-content-between">
-                                <p>Subject</p>
-                                <p>Date</p>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <p>From</p>
-                            </div>
-                            <div class="row">
-                                <p>Body...</p>
-                            </div>
-                        </li>   <!-- Email1 Preview End -->
-                        <li class="list-group-item emailPreview2">    <!-- Email1 Preview -->
-                            <div class="d-flex justify-content-between">
-                                <p>Subject</p>
-                                <p>Date</p>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <p>From</p>
-                            </div>
-                            <div class="row">
-                                <p>Body...</p>
-                            </div>
-                        </li>   <!-- Email1 Preview End -->
-                    </ul>
-                </div>
-            </div>  <!-- Email Preview Column End -->
-            <div class="col">   <!-- Full Email Column -->
-                <div class="d-flex justify-content-end">
-                    <ul class="list-group list-group-horizontal">
-                        <button type="button" class="list-group-item emailButton">
-                            Delete
-                        </button>
-                        <button type="button" class="list-group-item emailButton">
-                            Move
-                        </button>
-                        <button type="button" class="list-group-item emailButton">
-                            Forward
-                        </button>
-                        <button type="button" class="list-group-item emailButton">
-                            Reply
-                        </button>
-                    </ul>
-                </div>
-                <div class="row"> <!-- Full Email -->
-                    <div class="col">
-                        <div class="row"> <!-- Title and Date -->
-                            <div class="col">
-                                <div class="row">
-                                    <p> Title </p> 
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="d-flex justify-content-end">
-                                    <p>Date</p>
-                                </div>
-                            </div>
-                        </div> <!-- Title and Date End -->
-                        <div class="row">
-                            <p> From: Picture, Name, Email </p>
-                        </div>
-                        <div class="row">
-                            <p>CC: Picture, Name, Email </p>
-                        </div>
-                        <div class="row">
-                            <p>Full email............</p>
+                <div class="col-2"> <!-- Mailbox Column -->
+                    <div class="row">
+                        <div class="list-group mailboxList">
+                            <button type="button" class="list-group-item mailboxListButton">
+                                <a style="text-decoration: none; color: black;" href="email.html">New Mail</a>
+                            </button>
+                            <button type="button" class="list-group-item mailboxListButton" id="inbox">
+                                Inbox
+                            </button>
+                            <button type="button" class="list-group-item mailboxListButton" id="sent">
+                                Sent
+                            </button>
+                            <button type="button" class="list-group-item mailboxListButton" id="spam">
+                                Spam
+                            </button>
+                            <button type="button" class="list-group-item mailboxListButton" id="trash">
+                                Trash
+                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <ul class="list-group list-group-horizontal">
-                        <button type="button" class="list-group-item emailButton">
-                            Delete
-                        </button>
-                        <button type="button" class="list-group-item emailButton">
-                            Move
-                        </button>
-                        <button type="button" class="list-group-item emailButton">
-                            Forward
-                        </button>
-                        <button type="button" class="list-group-item emailButton">
-                            Reply
-                        </button>
-                    </ul>
-                </div>
-            </div>  <!-- Full Email Column End -->
+                </div> <!-- Mailbox Column End-->
+                <div class="col-3">   <!-- Email Preview Column -->
+                    <div class="row">
+                        <div style="margin-bottom: 2%;">
+                            <ul class="list-group emailPreviewList">
+                                <button type="button" class="list-group-item emailListElement">
+                                    <div class="d-flex justify-content-between">
+                                        <p>Title1</p>
+                                        <p>Date1</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>From1</p>
+                                        <p>Pic1</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <p>Body1...</p>
+                                    </div>
+                                </button>
+                                <button type="button" class="list-group-item emailListElement">
+                                    <div class="d-flex justify-content-between">
+                                        <p>Title1</p>
+                                        <p>Date1</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>From1</p>
+                                        <p>Pic1</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <p>Body1...</p>
+                                    </div>
+                                </button>
+                                <button type="button" class="list-group-item emailListElement">
+                                    <div class="d-flex justify-content-between">
+                                        <p>Title1</p>
+                                        <p>Date1</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>From1</p>
+                                        <p>Pic1</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <p>Body1...</p>
+                                    </div>
+                                </button>
+                                <button type="button" class="list-group-item emailListElement">
+                                    <div class="d-flex justify-content-between">
+                                        <p>Title1</p>
+                                        <p>Date1</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>From1</p>
+                                        <p>Pic1</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <p>Body1...</p>
+                                    </div>
+                                </button>
+                                <button type="button" class="list-group-item emailListElement">
+                                    <div class="d-flex justify-content-between">
+                                        <p>Title1</p>
+                                        <p>Date1</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>From1</p>
+                                        <p>Pic1</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <p>Body1...</p>
+                                    </div>
+                                </button>
+                                <button type="button" class="list-group-item emailListElement">
+                                    <div class="d-flex justify-content-between">
+                                        <p>Title1</p>
+                                        <p>Date1</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>From1</p>
+                                        <p>Pic1</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <p>Body1...</p>
+                                    </div>
+                                </button>
+                                <button type="button" class="list-group-item emailListElement">
+                                    <div class="d-flex justify-content-between">
+                                        <p>Title1</p>
+                                        <p>Date1</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>From1</p>
+                                        <p>Pic1</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <p>Body1...</p>
+                                    </div>
+                                </button>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>  <!-- Email Preview Column End -->
+                <div class="col">   <!-- Full Email Column -->
+                    <div class="d-flex justify-content-end">
+                        <ul class="list-group list-group-horizontal">
+                            <button type="button" class="list-group-item emailButton">
+                                Delete
+                            </button>
+                            <button type="button" class="list-group-item emailButton">
+                                Move
+                            </button>
+                            <button type="button" class="list-group-item emailButton">
+                                Forward
+                            </button>
+                            <button type="button" class="list-group-item emailButton">
+                                Reply
+                            </button>
+                        </ul>
+                    </div>
+                    <div class="card fullEmailContainer">
+                        <div class="card-header">
+                            <div class="customCardHeader">
+                                <p class="emailHeader">Title</p>
+                                <p class="emailHeader">Date</p>
+                            </div>
+                            <div class="from">
+                                <p class="emailHeader">From</p>
+                            </div>
+                            <div class="cc">
+                                <p class="emailHeader">CC:</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="messageWrapper">
+                                <p class="card-text">Full message........................... <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>  <!-- Full Email Column End -->
+            </div>
         </div>
-    </div>
-    <script src="home.js"></script>
+        <script src="home.js"></script>
 </body>
 </html>

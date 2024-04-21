@@ -255,7 +255,7 @@ app.post('/loadRecentMessages', async (req, res) => {
     oauth2Client.setCredentials({access_token : accessToken});
     const response = await gmail.users.messages.list({
         userId: 'me',
-        maxResults: 2,
+        // maxResults: 2,
         q: 'in:'.concat(folder)
     });
 
