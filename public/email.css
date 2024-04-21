@@ -1,24 +1,35 @@
-.background{
-    width: 100%; 
-    height: 100%; 
-    background: linear-gradient(to top right, #ffff99 0%, #99ccff 100%); 
-    background-repeat: no-repeat; 
-    background-size: contain;
+.title{
+    margin-bottom: 3%;
 }
 
 .contentBackground{
     background-color: beige;
-    margin-top: 10%;
+    margin-top: 5%;
     margin-right: 20%;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
     margin-left: 20%;
-    padding-left: 5%;
+    padding-left: 7%;
     padding-top: 5%;
     padding-bottom: 5%;
-    padding-right: 5%;
+    padding-right: 7%;
 }
 
+.sendButton{
+    margin-left: 83%;
+    background-color: rgb(192,192,192); 
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
 
+.sendButton:hover{
+    background-color: rgb(0, 62, 250); 
+    color: white;
+}
+
+.baseFont{
+    font-size: 14pt;
+}
 
 /* .columnEmail{
     position: absolute;
@@ -67,6 +78,11 @@
     height: 80%;
     background-color: none;
 }
+
+Javascript API send emails
+Gmail api wrapper
+
+
 .Label{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 18px;
