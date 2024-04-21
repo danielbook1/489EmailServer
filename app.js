@@ -149,8 +149,14 @@ async function isAdmin(username) {
 }
 
 // view handlers
-app.get('/email.html', requireLogin, requireNoAdmin, (req, res) => {
-    res.sendFile(__dirname + '/views/email.html');
+app.get('/email', requireLogin, requireNoAdmin, (req, res) => {
+    const email = req.query.email;
+    if (!email){
+        res.redirect('/home.html');
+    }
+    else{
+        res.render('email', { email: email });
+    }
 });
 
 app.get('/home.html', requireLogin, requireNoAdmin, (req, res) => {
@@ -220,25 +226,44 @@ app.get('/loadEmails', async (req, res) => {
     res.json(await getEmailsFromDatabase(req.session.userId));
 });
 
-app.post('/sendEmail', (req, res) => {
+app.post('/sendEmail', async (req, res) => {
     const toAddress = req.body.toAddress;
     const fromAddress = req.body.fromAddress;
     const subject = req.body.subject;
     const body = req.body.body;
     const raw = makeRawEmail(fromAddress, toAddress, subject, body);
 
+    refreshToken = await getTokenFromDatabase(req.session.userId, fromAddress);
+    oauth2Client.setCredentials({refresh_token : refreshToken});
+    accessToken = (await oauth2Client.getAccessToken()).token;
+    oauth2Client.setCredentials({access_token : accessToken});
+
     gmail.users.messages.send({
         userId: 'me',
         resource: {
             raw: raw
         }
-    }, (err, res) => {
+    },
+    (err, res) => {
         if (err) {
             console.error('The API returned an error:', err);
             return;
         }
     });
 });
+function makeRawEmail(fromAddress, toAddress, subject, body) {
+    const emailLines = [
+        `From: ${fromAddress}`,
+        `To: ${toAddress}`,
+        'Content-Type: text/html; charset="UTF-8"',
+        'MIME-Version: 1.0',
+        `Subject: ${subject}`,
+        '',
+        `${body}`
+    ];
+    const raw = emailLines.join('\r\n').trim();
+    return Buffer.from(raw).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
 
 app.post('/loadRecentMessages', async (req, res) => {
     // get refresh token from database using user and email (from req)
@@ -255,7 +280,7 @@ app.post('/loadRecentMessages', async (req, res) => {
     oauth2Client.setCredentials({access_token : accessToken});
     const response = await gmail.users.messages.list({
         userId: 'me',
-        maxResults: 2,
+        // maxResults: 2,
         q: 'in:'.concat(folder)
     });
 
