@@ -1,7 +1,8 @@
-let currentEmail = ''
+let currentEmail = undefined
 
 document.addEventListener('DOMContentLoaded', function() {
     const addButton = document.getElementById('addEmail');
+    const newMailButton = document.getElementById('newMail');
     const logoutButton = document.getElementById('logout');
     const inboxButton = document.getElementById('inbox');
     const sentButton = document.getElementById('sent');
@@ -34,6 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    newMailButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        if (currentEmail){
+            window.location.href = `email?email=${encodeURIComponent(currentEmail)}`;
+        }
+    });
+
     logoutButton.addEventListener('click', function(event) {
         event.preventDefault();
   
@@ -57,85 +65,93 @@ document.addEventListener('DOMContentLoaded', function() {
     inboxButton.addEventListener('click', function(event) {
         event.preventDefault();
         folder = "inbox";
-        fetch('/loadRecentMessages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({currentEmail, folder})
-        })
-        .then(async response => {
-            if (response.ok) {
-                messageInfo = await response.json();
-                populateEmailPreviews(messageInfo);
-            } 
-            else {
-              console.error('Could not load messages');
-            }
-        })
+        if (currentEmail){
+            fetch('/loadRecentMessages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({currentEmail, folder})
+            })
+            .then(async response => {
+                if (response.ok) {
+                    messageInfo = await response.json();
+                    populateEmailPreviews(messageInfo);
+                } 
+                else {
+                  console.error('Could not load messages');
+                }
+            })
+        }
     });
 
     sentButton.addEventListener('click', function(event) {
         event.preventDefault();
         folder = "sent";
-        fetch('/loadRecentMessages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({currentEmail, folder})
-        })
-        .then(async response => {
-            if (response.ok) {
-                messageInfo = await response.json();
-                populateEmailPreviews(messageInfo);
-            } 
-            else {
-              console.error('Could not load messages');
-            }
-        })
+        if (currentEmail){
+            fetch('/loadRecentMessages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({currentEmail, folder})
+            })
+            .then(async response => {
+                if (response.ok) {
+                    messageInfo = await response.json();
+                    populateEmailPreviews(messageInfo);
+                } 
+                else {
+                  console.error('Could not load messages');
+                }
+            })
+        }
     });
 
     spamButton.addEventListener('click', function(event) {
         event.preventDefault();
         folder = "spam";
-        fetch('/loadRecentMessages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({currentEmail, folder})
-        })
-        .then(async response => {
-            if (response.ok) {
-                messageInfo = await response.json();
-                populateEmailPreviews(messageInfo);
-            } 
-            else {
-              console.error('Could not load messages');
-            }
-        })
+        if (currentEmail){
+            fetch('/loadRecentMessages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({currentEmail, folder})
+            })
+            .then(async response => {
+                if (response.ok) {
+                    messageInfo = await response.json();
+                    populateEmailPreviews(messageInfo);
+                } 
+                else {
+                  console.error('Could not load messages');
+                }
+            })
+        }
     });
 
     trashButton.addEventListener('click', function(event) {
         event.preventDefault();
         folder = "trash";
-        fetch('/loadRecentMessages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({currentEmail, folder})
-        })
-        .then(async response => {
-            if (response.ok) {
-                messageInfo = await response.json();
-                populateEmailPreviews(messageInfo);
-            } 
-            else {
-              console.error('Could not load messages');
-            }
-        })
+        if (currentEmail){
+            fetch('/loadRecentMessages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({currentEmail, folder})
+            })
+            .then(async response => {
+                if (response.ok) {
+                    messageInfo = await response.json();
+                    populateEmailPreviews(messageInfo);
+                } 
+                else {
+                  console.error('Could not load messages');
+                }
+            })
+        }
     });
 });
 
