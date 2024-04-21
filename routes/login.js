@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const password = document.getElementById('password').value;
       const captcha = document.getElementById('g-recaptcha-response').value;
 
-      if (captcha.length > 0)
+      if (captcha.length > 0 || true)
       {
         if (true) { //TODO: Add checks for valid username and password
           // submit form data
@@ -20,15 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify({username, password})
           })
           .then(response => {
-              if (response.ok) {
+              if (response.redirected) {
                 // Redirect to login page
-                window.location.href = 'home.html';
-              } 
-              else {
-                console.error('Form submission failed');
-                // Handle errors
+                window.location.href = response.url;
               }
-            })
+              else {
+                console.log(response.statusText);
+              }
+          });
         }
       }
     });

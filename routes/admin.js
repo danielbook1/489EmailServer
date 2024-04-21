@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const petitionForm = document.getElementById('promoteUser');
+    const logoutButton = document.getElementById('logout');
       
     petitionForm.addEventListener('submit', function(event) {
       event.preventDefault();
@@ -29,6 +30,26 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         }
       
+    });
+
+    logoutButton.addEventListener('click', function(event) {
+        event.preventDefault();
+  
+        fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.redirected) {
+              // Redirect to login page
+              window.location.href = response.url;
+            }
+            else {
+              console.log(response.statusText);
+            }
+        });
     });
 });
 
@@ -102,3 +123,8 @@ document.addEventListener('DOMContentLoaded', function() {
       
     });
 });
+
+// notes:
+// refresh page when database info changes
+// add demote user functionality
+// clear refresh tokens from database when user is deleted

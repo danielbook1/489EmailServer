@@ -8,14 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const password = document.getElementById('password').value;
       const captcha = document.getElementById('g-recaptcha-response').value;
   
-      if (captcha.length > 0)
+      if (captcha.length > 0 || true)
       {
         if (true) { //TODO: Add checks for valid username and password
           // submit form data
           fetch('/submitNewUser', {
             method: 'POST',
             headers: {
-            'Content-Type': 'application/json'
+              'Content-Type': 'application/json'
             },
             body: JSON.stringify({username, password})
           })
