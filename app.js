@@ -30,12 +30,6 @@ const gmail = google.gmail({
 
 // create table if needed
 db.serialize(() => {
-    // db.run(`CREATE TABLE IF NOT EXISTS Users (
-    //         username TEXT PRIMARY KEY,
-    //         password TEXT NOT NULL,
-    //         admin TEXT NOT NULL
-    //         )`);
-    // Check if the Users table exists
     db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='Users'", (err, row) => {
         if (err) {
             console.error('Error checking Users table:', err.message);
@@ -224,6 +218,26 @@ app.get('/', async (req, res) => {
 // other request handlers
 app.get('/loadEmails', async (req, res) => {
     res.json(await getEmailsFromDatabase(req.session.userId));
+});
+
+app.post('/sendEmail', (req, res) => {
+    const toAddress = req.body.toAddress;
+    const fromAddress = req.body.fromAddress;
+    const subject = req.body.subject;
+    const body = req.body.body;
+    const raw = makeRawEmail(fromAddress, toAddress, subject, body);
+
+    gmail.users.messages.send({
+        userId: 'me',
+        resource: {
+            raw: raw
+        }
+    }, (err, res) => {
+        if (err) {
+            console.error('The API returned an error:', err);
+            return;
+        }
+    });
 });
 
 app.post('/loadRecentMessages', async (req, res) => {
