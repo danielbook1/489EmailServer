@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const petitionForm = document.getElementById('promoteUser');
+    const logoutButton = document.getElementById('logout');
+    const deleteForm = document.getElementById('deleteUser');
       
     petitionForm.addEventListener('submit', function(event) {
       event.preventDefault();
@@ -30,12 +32,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       
     });
-});
 
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const deleteForm = document.getElementById('deleteUser');
+    logoutButton.addEventListener('click', function(event) {
+        event.preventDefault();
+  
+        fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.redirected) {
+              // Redirect to login page
+              window.location.href = response.url;
+            }
+            else {
+              console.log(response.statusText);
+            }
+        });
+    });
       
     deleteForm.addEventListener('submit', function(event) {
       event.preventDefault();
@@ -68,37 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    const deleteForm = document.getElementById('logOut');
-      
-    deleteForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-        
-      const username = '0'
-      const password = '0'
-      const formType = 'logOut'
-
-      if (true) { //TODO: Add checks for valid username and password
-        // submit form data
-        fetch('/admin', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({username, password, formType})
-        })
-        .then(response => {
-            if (response.ok) {
-            // Redirect to logour page
-            window.location.href = 'logout.html';
-            } 
-            else {
-            console.error('Form submission failed');
-            // Handle errors
-            }
-        })
-        }
-      
-    });
-});
+// notes:
+// refresh page when database info changes
+// add demote user functionality
+// clear refresh tokens from database when user is deleted

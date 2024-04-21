@@ -23,7 +23,8 @@
             <div class="collapse navbar-collapse justify-content-end">  <!-- Right Navbar-->
                 <ul class="navbar-nav">
                     <li class="nav-item navbarItem">
-                        <a class="nav-link" aria-current="page" href="/logout">Logout</a>
+                        <!-- <a class="nav-link" aria-current="page" href="/logout">Logout</a> -->
+                        <button type="button" id="logout">Logout</button>
                     </li>
                 </ul>
             </div>  <!-- Right Navbar End-->
@@ -34,17 +35,8 @@
         <div class="row">
             <div class="col-2">
                 <div class="list-group userEmailList">
-                    <button type="button" class="list-group-item userEmailListButton" id="addEmail">
+                    <button type="button" class="list-group-item userEmailAddButton" id="addEmail">
                         Add Email
-                    </button>
-                    <button type="button" class="list-group-item userEmailListButton">
-                        Email1
-                    </button>
-                    <button type="button" class="list-group-item userEmailListButton">
-                        Email2
-                    </button>
-                    <button type="button" class="list-group-item userEmailListButton">
-                        Email3
                     </button>
                 </div>
             </div>
@@ -54,16 +46,16 @@
                         <button type="button" class="list-group-item mailboxListButton">
                             <a style="text-decoration: none; color: black;" href="email.html">New Mail</a>
                         </button>
-                        <button type="button" class="list-group-item mailboxListButton">
+                        <button type="button" class="list-group-item mailboxListButton" id="inbox">
                             Inbox
                         </button>
-                        <button type="button" class="list-group-item mailboxListButton">
+                        <button type="button" class="list-group-item mailboxListButton" id="sent">
                             Sent
                         </button>
-                        <button type="button" class="list-group-item mailboxListButton">
+                        <button type="button" class="list-group-item mailboxListButton" id="spam">
                             Spam
                         </button>
-                        <button type="button" class="list-group-item mailboxListButton">
+                        <button type="button" class="list-group-item mailboxListButton" id="trash">
                             Trash
                         </button>
                     </div>
@@ -72,30 +64,28 @@
             <div class="col-3">   <!-- Email Preview Column -->
                 <div class="row">
                     <ul class="list-group emailList">
-                        <li class="list-group-item emailListElement">    <!-- Email1 Preview -->
+                        <li class="list-group-item emailPreview1">    <!-- Email1 Preview -->
                             <div class="d-flex justify-content-between">
-                                <p>Title1</p>
-                                <p>Date1</p>
+                                <p>Subject</p>
+                                <p>Date</p>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <p>From1</p>
-                                <p>Pic1</p>
+                                <p>From</p>
                             </div>
                             <div class="row">
-                                <p>Body1...</p>
+                                <p>Body...</p>
                             </div>
                         </li>   <!-- Email1 Preview End -->
-                        <li class="list-group-item emailListElement">    <!-- Email1 Preview -->
+                        <li class="list-group-item emailPreview2">    <!-- Email1 Preview -->
                             <div class="d-flex justify-content-between">
-                                <p>Title2</p>
-                                <p>Date2</p>
+                                <p>Subject</p>
+                                <p>Date</p>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <p>From2</p>
-                                <p>Pic2</p>
+                                <p>From</p>
                             </div>
                             <div class="row">
-                                <p>Body2...</p>
+                                <p>Body...</p>
                             </div>
                         </li>   <!-- Email1 Preview End -->
                     </ul>
