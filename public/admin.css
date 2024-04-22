@@ -1,0 +1,24 @@
+.contentBackground{
+    background-color: beige;
+    margin-top: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    padding-left: 7%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-right: 7%;
+}
+
+.customTable{
+    margin-left: 5%;
+}
+
+.tableHeader{
+    text-align:left;
+    margin-left: 5%;
+}
+
+.centerText{
+    text-align: center;
+}

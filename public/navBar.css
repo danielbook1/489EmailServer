@@ -12,3 +12,11 @@
 .navbarItemPipe{
     font-size: 18pt
 }
+
+.navLogout{
+    background-color: lightgray;
+}
+
+.navLogout:hover{
+    background-color: beige;
+}
