@@ -244,7 +244,7 @@ app.post('/sendEmail', async (req, res) => {
             raw: raw
         }
     },
-    (err, res) => {
+    (err, resp) => {
         if (err) {
             console.error('The API returned an error:', err);
             return;

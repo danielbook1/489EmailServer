@@ -235,6 +235,32 @@ function populateEmailPreviews(messageInfo) {
 
             //set html string
             newButton.innerHTML = html;
+
+            newButton.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                const textEncoded = message.payload.parts[0].body.data;
+                const uint8Array = new Uint8Array(atob(textEncoded).split('').map(char => char.charCodeAt(0)));
+                const decoder = new TextDecoder('utf-8');
+                const textDecoded = decoder.decode(uint8Array);
+
+                const fullEmailContainer = document.querySelector('.fullEmailContainer');
+                fullEmailContainer.innerHTML = '<div class="card-header">\
+                                                    <div class="customCardHeader">\
+                                                        <p class="emailHeader">Title: '+subject+'</p>\
+                                                        <p class="emailHeader">Date: '+date+'</p>\
+                                                    </div>\
+                                                    <div class="from">\
+                                                        <p class="emailHeader">From: '+sender+'</p>\
+                                                    </div>\
+                                                </div>\
+                                                <div class="card-body">\
+                                                    <div class="messageWrapper">\
+                                                        <p class="card-text">'+textDecoded+'</p>\
+                                                    </div>\
+                                                </div>';
+            });
+
             emailPreviewList.appendChild(newButton);
         });
         
