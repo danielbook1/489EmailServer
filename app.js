@@ -394,15 +394,24 @@ app.post('/admin', (req, res) => {
     //Action when deleteUser is submitted
     else if(formType === 'deleteUser')
     {
-        const promoteToAdmin = `DELETE FROM Users WHERE username = ? AND password = ?`
+        const removeUser = `DELETE FROM Users WHERE username = ? AND password = ?`
+        const removeToken = 'DELETE FROM RefreshTokens WHERE username = ?'
         const yes = 'yes'
-        db.run(promoteToAdmin, [username, password], function(err) {
+        db.run(removeUser, [username, password], function(err) {
             if (err) {
               console.error('Error cannot delete user: ', err.message);
               return;
             }
             console.log('User deleted successfully.');
-          }); 
+        }); 
+
+        db.run(removeToken, [username], function(err) {
+        if (err) {
+            console.error('Error cannot delete Token: ', err.message);
+            return;
+        }
+            console.log('User deleted successfully.');
+        }); 
         db.close();
     }
 
