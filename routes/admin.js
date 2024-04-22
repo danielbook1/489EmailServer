@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const password = document.getElementById('password').value;
       const formType = 'promoteUser'
 
-      if (true) { //TODO: Add checks for valid username and password
         // submit form data
         fetch('/admin', {
         method: 'POST',
@@ -29,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Handle errors
             }
         })
-        }
+        
       
     });
 
@@ -60,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const password = document.getElementById('password2').value;
       const formType = 'deleteUser'
 
-      if (true) { //TODO: Add checks for valid username and password
+    
         // submit form data
         fetch('/admin', {
         method: 'POST',
@@ -79,12 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Handle errors
             }
         })
-        }
+        
       
     });
 });
-
-// notes:
-// refresh page when database info changes
-// add demote user functionality
-// clear refresh tokens from database when user is deleted

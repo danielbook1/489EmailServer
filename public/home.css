@@ -6,18 +6,7 @@
 .body{
     height: 100hv;
 }
-/* .mainContainer{
-    /*height: 100%;*/
 
-/* .bottomSpace{
-    height: 100%;
-} */
-
-/* Email List */
-
-/* .userEmailList{
-    
-} */
 .userEmailListButton {
     font-size: 14pt;
 
@@ -35,11 +24,6 @@
 .userEmailAddButton:hover{
     background-color: lightgray !important;
 }
-
-/* Mailbox List */
-/* .mailboxList{
-
-} */
 
 .emailPreviewList{
     height: 87vh;
