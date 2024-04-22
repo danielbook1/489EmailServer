@@ -1,16 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
     const sendButton = document.getElementById('send');
+    const fromLabel = document.getElementById('From');
     const toInput = document.getElementById('To');
     const subjectInput = document.getElementById('Subject');
-    const messageInput = document.getElementById('Message')
+    const messageInput = document.getElementById('Message');
+    loadFromEmail();
       
     sendButton.addEventListener('click', function(event) {
         event.preventDefault();
         
-        fromAddress = "daniel@bookfamily.com",
-        toAddress = "dannybok364@gmail.com",
-        subject = "testing send from app.js",
-        body = "test contents!\nwootwoot!"
+        let fromAddress = fromLabel.innerHTML;
+        let toAddress = toInput.value;
+        let subject = subjectInput.value;
+        let body = messageInput.value;
 
         fetch('/sendEmail', {
             method: 'POST',
@@ -18,7 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
             'Content-Type': 'application/json'
             },
             body: JSON.stringify({fromAddress, toAddress, subject, body})
-          })
+        });
+
+        window.location.href = '/home.html';
     });
 });
 
@@ -34,5 +38,3 @@ function loadFromEmail(){
     const fromLabel = document.getElementById('From');
     fromLabel.innerHTML = email;
 }
-
-loadFromEmail();
