@@ -1,0 +1,25 @@
+.contentBackground{
+    background-color: beige;
+    margin-top: 5%;
+    margin-right: 30%;
+    margin-bottom: 5%;
+    margin-left: 30%;
+    padding-left: 7%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-right: 7%;
+}
+
+.captcha-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo{
+    width:75%;
+}
+
+.centerImage{
+    text-align: center;
+}
